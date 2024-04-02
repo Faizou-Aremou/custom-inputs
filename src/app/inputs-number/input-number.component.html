@@ -1,0 +1,27 @@
+<div
+  *ngIf="control"
+  class="input-number"
+  (focusin)="onFocusIn($event)"
+  (focusout)="onFocusOut($event)"
+>
+  <mat-form-field color="accent" [hintLabel]="hintLabel">
+    <mat-label
+      class="input-number__label"
+      [matTooltip]="labelTooltip ?? label"
+      matTooltipClass="mat-label-tooltip mat-tooltip-multiline"
+      matTooltipShowDelay="500"
+      matTooltipPosition="above"
+    >
+      {{ label }}
+    </mat-label>
+    <input
+      matInput
+      color="accent"
+      class="number-input__field"
+      type="number"
+      [formControl]="control"
+      autocomplete="off"
+      (keyup)="onKeyUp($event)"
+    />
+  </mat-form-field>
+</div>

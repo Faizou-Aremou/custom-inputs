@@ -1,0 +1,67 @@
+<ng-container *ngIf="form">
+  <div class="input-min-max-mean__label" *ngIf="displayFormLabel">
+    <span
+      [matTooltip]="labelTooltip ?? label"
+      matTooltipClass="mat-label-tooltip mat-tooltip-multiline"
+      matTooltipShowDelay="500"
+      matTooltipPosition="above"
+      >{{ label }}</span
+    >
+  </div>
+  <div
+    class="input-min-max-mean__controls"
+    [ngClass]="{ 'input-min-max-mean__controls--error': form.invalid }"
+  >
+    <ng-container [ngSwitch]="fieldsType">
+      <ng-container *ngSwitchCase="InputNumberFieldsType.MinMax">
+        <tx-input-number
+          class="input-min-max-mean__control--min"
+          [label]="minLabel"
+          [labelTooltip]="labelTooltip"
+          [formControl]="minControl"
+        >
+        </tx-input-number>
+        <span> to </span>
+        <tx-input-number
+          class="input-min-max-mean__control--max"
+          [label]="maxLabel"
+          [labelTooltip]="labelTooltip"
+          [formControl]="minControl"
+        >
+        </tx-input-number>
+      </ng-container>
+      <ng-container *ngSwitchCase="InputNumberFieldsType.MinMaxMean">
+        <tx-input-number
+          class="input-min-max-mean__control--min"
+          [label]="minLabel"
+          [labelTooltip]="labelTooltip"
+          [formControl]="minControl"
+        >
+        </tx-input-number>
+        <span> to </span>
+        <tx-input-number
+          class="input-min-max-mean__control--max"
+          [label]="maxLabel"
+          [labelTooltip]="labelTooltip"
+          [formControl]="maxControl"
+        >
+        </tx-input-number>
+        <span class="input-min-max-mean__separator"> / </span>
+        <tx-input-number
+          class="input-min-max-mean__control--mean"
+          [label]="meanLabel"
+          [labelTooltip]="labelTooltip"
+          [formControl]="meanControl"
+        >
+        </tx-input-number>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="units.length > 0">
+      <span class="input-min-max-mean__separator">{{ units[0].name }}</span>
+      <tx-input-select
+        class="input-min-max-mean__control--unit"
+        [options]="units"
+        [formControl]="unitControl"
+      ></tx-input-select>
+    </ng-container></div
+></ng-container>

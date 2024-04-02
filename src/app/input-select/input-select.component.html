@@ -1,0 +1,12 @@
+<ng-container *ngIf="control">
+  <mat-form-field>
+    <mat-select [formControl]="control">
+      <mat-option
+        class="input-select__option"
+        *ngFor="let option of options"
+        [value]="option.id"
+        >{{ option.name }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</ng-container>
