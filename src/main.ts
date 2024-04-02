@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import 'zone.js';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { InputMinMaxMeanComponent } from './app/inputs-number/input-min-max-mean.component';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MinMax, TxUnit } from './app/inputs-number/models';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,12 @@ import { MinMax, TxUnit } from './app/inputs-number/models';
     </app-input-number>
   `,
 })
-export class App {
+export class App implements OnInit {
+  ngOnInit(): void {
+    this.control.valueChanges
+      .pipe(tap((val) => console.log(this.control.errors)))
+      .subscribe();
+  }
   name = 'Angular';
   inputLabel = 'Bassetti Numbers';
   control = new FormControl<MinMax>({ min: 3, max: 6, unit: 1 });
